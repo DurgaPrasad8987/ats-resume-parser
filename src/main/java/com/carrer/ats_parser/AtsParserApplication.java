@@ -8,6 +8,7 @@ public class AtsParserApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AtsParserApplication.class, args);
+		System.out.println("🚀 Smart ATS is running at: http://localhost:8080");
 	}
 
 }
