@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart ATS Resume Scorer</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="main-card">
+    <h1>🚀 Smart ATS Resume Scorer</h1>
+    <p>Analyze how well your resume matches the job description.</p>
+
+    <form th:action="@{/analyze}" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label>Step 1: Paste Job Description</label>
+            <textarea name="jobDescription" class="form-control" rows="5" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label>Step 2: Upload Resume (PDF)</label>
+            <div class="upload-area">
+                <input type="file" name="resumeFile" accept=".pdf" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-primary">Calculate Match Percentage</button>
+    </form>
+</div>
+</body>
+</html>
