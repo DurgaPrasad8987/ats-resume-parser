@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Analysis Results | Smart ATS</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="main-card">
+    <h1>📊 Analysis Results</h1>
+    <p>Results for: <strong th:text="${fileName}">Resume.pdf</strong></p>
+
+    <div style="text-align: center; padding: 20px; background: #f0fdf4; border-radius: 15px; margin: 20px 0;">
+        <h2 style="margin: 0; color: #059669; font-size: 3rem;">
+            <span th:text="${score}">0</span>%
+        </h2>
+        <p style="font-weight: bold; color: #065f46;">MATCH SCORE</p>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <h3 style="color: #94a3b8; font-size: 0.8rem; text-transform: uppercase;">✅ Matched Keywords</h3>
+        <p th:text="${matched}" style="background: #f8fafc; padding: 10px; border-radius: 8px; color: #1e293b;">Java, Spring...</p>
+
+        <h3 style="color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; margin-top: 15px;">❌ Missing Skills</h3>
+        <p th:text="${missing}" style="background: #fff1f2; padding: 10px; border-radius: 8px; color: #9f1239;">Docker, AWS...</p>
+    </div>
+
+    <div style="margin-top: 30px; display: flex; gap: 10px;">
+        <a th:href="@{/download(score=${score}, name=${fileName})}" class="btn-primary" style="flex: 2; text-decoration: none; text-align: center; background: #2563eb;">Download PDF Report</a>
+        <a href="/" class="btn-primary" style="flex: 1; text-decoration: none; text-align: center; background: #64748b;">Back</a>
+    </div>
+</div>
+</body>
+</html>
