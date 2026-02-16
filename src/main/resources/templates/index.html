@@ -2,30 +2,41 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Smart ATS Resume Scorer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart ATS | AI Resume Scorer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="main-card">
-    <h1>🚀 Smart ATS Resume Scorer</h1>
-    <p>Analyze how well your resume matches the job description.</p>
+<div class="container">
+    <header class="hero">
+        <h1>Smart ATS</h1>
+        <p>High-precision resume matching for modern careers.</p>
+    </header>
 
-    <form th:action="@{/upload}" method="post" enctype="multipart/form-data">
+    <main class="glass-card">
+        <form th:action="@{/upload}" method="post" enctype="multipart/form-data">
 
-        <div class="mb-3">
-            <label>Step 1: Paste Job Description</label>
-            <textarea name="jobDescription" class="form-control" rows="5" required placeholder="Paste requirements here..."></textarea>
-        </div>
-
-        <div class="mb-3">
-            <label>Step 2: Upload Resume (PDF)</label>
-            <div class="upload-area">
-                <input type="file" name="file" accept=".pdf" required>
+            <div class="input-wrapper">
+                <label>Job Requirements</label>
+                <textarea name="jobDescription" placeholder="Paste the job requirements here..." required></textarea>
             </div>
-        </div>
 
-        <button type="submit" class="btn-primary">Analyze & Calculate Match %</button>
-    </form>
+            <div class="input-wrapper">
+                <label>Your Resume</label>
+                <div class="file-drop-area">
+                    <input type="file" name="file" accept=".pdf" required>
+                    <div class="file-msg">Click to choose or drag your PDF here</div>
+                </div>
+            </div>
+
+            <button type="submit" class="cta-button">Analyze Match</button>
+        </form>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Smart ATS Parser • AI Powered</p>
+    </footer>
 </div>
 </body>
 </html>
