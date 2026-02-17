@@ -27,7 +27,7 @@ body {
 /* THE "MEDIUM BIG" JOB DESCRIPTION BOX */
 textarea {
     width: 100% !important;
-    height: 300px !important; /* Adjusted from 450px to 300px for a better fit */
+    height: 300px !important;
     padding: 1.2rem !important;
     border: 1.5px solid #eef2f6 !important;
     border-radius: 12px !important;
@@ -47,13 +47,31 @@ textarea:focus {
 }
 
 .file-drop-area {
+    position: relative; /* Essential to keep the input contained */
     border: 2px dashed #cbd5e1;
     background: #f8fafc;
     border-radius: 15px;
-    padding: 2rem;
+    padding: 2.5rem; /* Increased padding for a better look */
     text-align: center;
-    position: relative;
     margin-bottom: 1.5rem;
+    cursor: pointer;
+}
+
+/* THE FIX: Hides "Choose file" and "No file chosen" */
+.file-drop-area input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0; /* Makes the browser's default button invisible */
+    cursor: pointer;
+}
+
+.file-msg {
+    color: #64748b;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 .cta-button {
