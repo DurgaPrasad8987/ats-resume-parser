@@ -1,72 +1,84 @@
 /* Path: src/main/resources/static/css/style.css */
 :root {
-    --primary: #10b981;
-    --primary-dark: #059669;
+    --primary: #6366f1; /* Modern indigo primary color */
+    --primary-dark: #4f46e5;
+    --accent: #10b981; /* Emerald for the analyze button */
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: var(--bg-gradient);
     font-family: 'Plus Jakarta Sans', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    padding: 20px; /* Essential for mobile spacing */
 }
 
-/* NEW: Styles to center the title and subtitle */
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* CENTERED HERO SECTION */
 .hero {
     text-align: center;
-    margin-bottom: 2rem;
+    color: white; /* Changed to white for better contrast on gradient */
+    margin-bottom: 2.5rem;
 }
 
 .hero h1 {
-    font-size: 2.5rem;
-    color: #1e293b;
+    font-size: clamp(2rem, 8vw, 3.5rem); /* Responsive font sizing */
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px; /* Space for the rocket symbol */
+    gap: 15px;
 }
 
 .hero p {
-    color: #64748b;
+    opacity: 0.9;
+    font-size: 1.1rem;
     margin: 0;
 }
 
+/* ATTRACTIVE GLASSMORPHISM CARD */
 .glass-card {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
     border-radius: 28px;
-    padding: 3rem;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    padding: clamp(1.5rem, 5vw, 3rem);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     width: 100%;
-    max-width: 750px;
-    text-align: left;
+    box-sizing: border-box;
 }
 
 /* THE "MEDIUM BIG" JOB DESCRIPTION BOX */
 textarea {
     width: 100% !important;
-    height: 300px !important;
+    height: 300px !important; /* Your preferred medium-big height */
     padding: 1.2rem !important;
-    border: 1.5px solid #eef2f6 !important;
-    border-radius: 12px !important;
+    border: 2px solid #eef2f6 !important;
+    border-radius: 15px !important;
     font-family: inherit !important;
-    font-size: 1rem !important;
+    font-size: 16px !important; /* Prevents auto-zoom on mobile */
     line-height: 1.6 !important;
-    resize: vertical !important;
+    resize: none !important;
     box-sizing: border-box !important;
     background-color: #fdfdfd !important;
     margin-bottom: 1.5rem !important;
+    transition: border-color 0.2s;
 }
 
 textarea:focus {
     outline: none !important;
     border-color: var(--primary) !important;
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1) !important;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1) !important;
 }
 
+/* CLEAN FILE DROP AREA */
 .file-drop-area {
     position: relative;
     border: 2px dashed #cbd5e1;
@@ -74,11 +86,17 @@ textarea:focus {
     border-radius: 15px;
     padding: 2.5rem;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-/* THE FIX: Hides "Choose file" and "No file chosen" */
+.file-drop-area:hover {
+    background: #f1f5f9;
+    border-color: var(--primary);
+}
+
+/* Hides "Choose file" text while keeping area clickable */
 .file-drop-area input[type="file"] {
     position: absolute;
     width: 100%;
@@ -95,14 +113,34 @@ textarea:focus {
     font-weight: 500;
 }
 
+/* ATTRACTIVE BUTTON */
 .cta-button {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    border: none; border-radius: 12px; color: white;
-    padding: 1.2rem; font-weight: 700; width: 100%;
-    cursor: pointer; transition: transform 0.2s;
+    background: linear-gradient(135deg, var(--accent) 0%, #059669 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 1.2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .cta-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+}
+
+/* MOBILE VIEW OPTIMIZATIONS */
+@media (max-width: 600px) {
+    .glass-card {
+        padding: 1.5rem;
+    }
+    textarea {
+        height: 200px !important; /* Slightly smaller for phone screens */
+    }
+    .hero h1 {
+        font-size: 2.2rem;
+    }
 }
