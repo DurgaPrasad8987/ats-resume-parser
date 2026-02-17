@@ -20,15 +20,15 @@ body {
     padding: 3rem;
     box-shadow: 0 15px 35px rgba(0,0,0,0.05);
     width: 100%;
-    max-width: 800px; /* Wider card for the larger box */
+    max-width: 750px;
     text-align: left;
 }
 
-/* THE "LITTLE BIG" JOB DESCRIPTION BOX */
+/* THE "MEDIUM BIG" JOB DESCRIPTION BOX */
 textarea {
     width: 100% !important;
-    height: 450px !important; /* Forces the taller height */
-    padding: 1.5rem !important;
+    height: 300px !important; /* Adjusted from 450px to 300px for a better fit */
+    padding: 1.2rem !important;
     border: 1.5px solid #eef2f6 !important;
     border-radius: 12px !important;
     font-family: inherit !important;
@@ -61,4 +61,9 @@ textarea:focus {
     border: none; border-radius: 12px; color: white;
     padding: 1.2rem; font-weight: 700; width: 100%;
     cursor: pointer; transition: transform 0.2s;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
 }
