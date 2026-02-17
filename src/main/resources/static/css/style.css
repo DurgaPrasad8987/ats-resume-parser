@@ -13,14 +13,13 @@ body {
     margin: 0;
 }
 
-/* This matches the <main class="glass-card"> in your new HTML */
 .glass-card {
     background: white;
     border-radius: 28px;
     padding: 3rem;
     box-shadow: 0 15px 35px rgba(0,0,0,0.05);
     width: 100%;
-    max-width: 580px;
+    max-width: 700px; /* Increased width for better space */
     text-align: left;
 }
 
@@ -30,16 +29,35 @@ body {
 .input-wrapper { margin-bottom: 1.5rem; }
 label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 0.5rem; color: #64748b; }
 
+/* LARGE JOB DESCRIPTION BOX */
 textarea {
-    width: 100%; height: 150px; padding: 1rem;
-    border: 1.5px solid #eef2f6; border-radius: 12px;
-    font-family: inherit; resize: none; box-sizing: border-box;
+    width: 100%;
+    height: 380px; /* Significantly increased height */
+    padding: 1.2rem;
+    border: 1.5px solid #eef2f6;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.6;
+    resize: vertical;
+    box-sizing: border-box;
+    background-color: #fdfdfd;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
 }
 
 .file-drop-area {
-    border: 2px dashed #cbd5e1; background: #f8fafc;
-    border-radius: 15px; padding: 2rem; text-align: center;
+    border: 2px dashed #cbd5e1;
+    background: #f8fafc;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
     position: relative;
+    margin-bottom: 1rem;
 }
 
 .file-drop-area input[type="file"] {
@@ -51,7 +69,6 @@ textarea {
     border: none; border-radius: 12px; color: white;
     padding: 1.1rem; font-weight: 700; width: 100%;
     cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
-    margin-top: 1rem;
 }
 
 .cta-button:hover {
