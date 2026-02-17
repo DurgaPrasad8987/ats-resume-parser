@@ -1,3 +1,4 @@
+/* Path: src/main/resources/static/css/style.css */
 :root {
     --primary: #10b981;
     --primary-dark: #059669;
@@ -19,35 +20,30 @@ body {
     padding: 3rem;
     box-shadow: 0 15px 35px rgba(0,0,0,0.05);
     width: 100%;
-    max-width: 700px; /* Increased width for better space */
+    max-width: 800px; /* Wider card for the larger box */
     text-align: left;
 }
 
-.hero { text-align: center; margin-bottom: 2rem; }
-.hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; letter-spacing: -1px; }
-
-.input-wrapper { margin-bottom: 1.5rem; }
-label { display: block; font-weight: 600; font-size: 0.85rem; margin-bottom: 0.5rem; color: #64748b; }
-
-/* LARGE JOB DESCRIPTION BOX */
+/* THE "LITTLE BIG" JOB DESCRIPTION BOX */
 textarea {
-    width: 100%;
-    height: 380px; /* Significantly increased height */
-    padding: 1.2rem;
-    border: 1.5px solid #eef2f6;
-    border-radius: 12px;
-    font-family: inherit;
-    font-size: 1rem;
-    line-height: 1.6;
-    resize: vertical;
-    box-sizing: border-box;
-    background-color: #fdfdfd;
+    width: 100% !important;
+    height: 450px !important; /* Forces the taller height */
+    padding: 1.5rem !important;
+    border: 1.5px solid #eef2f6 !important;
+    border-radius: 12px !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    resize: vertical !important;
+    box-sizing: border-box !important;
+    background-color: #fdfdfd !important;
+    margin-bottom: 1.5rem !important;
 }
 
 textarea:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+    outline: none !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1) !important;
 }
 
 .file-drop-area {
@@ -57,21 +53,12 @@ textarea:focus {
     padding: 2rem;
     text-align: center;
     position: relative;
-    margin-bottom: 1rem;
-}
-
-.file-drop-area input[type="file"] {
-    position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer;
+    margin-bottom: 1.5rem;
 }
 
 .cta-button {
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     border: none; border-radius: 12px; color: white;
-    padding: 1.1rem; font-weight: 700; width: 100%;
-    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+    padding: 1.2rem; font-weight: 700; width: 100%;
+    cursor: pointer; transition: transform 0.2s;
 }
