@@ -1,4 +1,3 @@
-/* Path: src/main/java/com/carrer/ats_parser/HelloController.java */
 package com.carrer.ats_parser;
 
 import org.springframework.stereotype.Controller;
@@ -12,19 +11,19 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class HelloController {
     private final Tika tika = new Tika();
 
     @GetMapping("/")
-    public String showUploadPage() { return "index"; }
+    public String index() { return "index"; }
 
     @PostMapping("/upload")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   @RequestParam("jobDescription") String jobDescription,
+                                   @RequestParam("jobDescription") String jd,
                                    Model model) {
         if (file.isEmpty()) {
             model.addAttribute("error", "Please select a file.");
@@ -33,35 +32,40 @@ public class HelloController {
 
         try {
             String resumeText = tika.parseToString(file.getInputStream()).toLowerCase();
-            String jobDescLower = jobDescription.toLowerCase();
+            String jdLower = jd.toLowerCase().replaceAll("[^a-zA-Z0-9 ]", " ");
 
-            String[] keywords = {"java", "spring", "sql", "maven", "rest", "api", "git", "docker", "aws", "hibernate", "python", "artificial intelligence"};
+            // Comprehensive industry keyword list
+            Set<String> masterKeywords = new HashSet<>(Arrays.asList(
+                    "java", "spring", "sql", "maven", "rest", "api", "git", "docker",
+                    "aws", "hibernate", "python", "artificial intelligence", "data science"
+            ));
 
-            int totalKeywordsInJD = 0;
-            int matches = 0;
+            // Only count keywords that actually appear in the Job Description
+            List<String> requiredSkills = masterKeywords.stream()
+                    .filter(jdLower::contains)
+                    .collect(Collectors.toList());
 
-            // FIX: Using java.util.List specifically to avoid the iText error
-            java.util.List<String> matchedSkills = new java.util.ArrayList<>();
-            java.util.List<String> missingSkills = new java.util.ArrayList<>();
-
-            for (String skill : keywords) {
-                if (jobDescLower.contains(skill)) {
-                    totalKeywordsInJD++;
-                    if (resumeText.contains(skill)) {
-                        matches++;
-                        matchedSkills.add(skill);
-                    } else {
-                        missingSkills.add(skill);
-                    }
-                }
+            if (requiredSkills.isEmpty()) {
+                model.addAttribute("score", 0);
+                model.addAttribute("matched", "No matching requirements found in JD.");
+                return "result";
             }
 
-            int finalScore = (totalKeywordsInJD > 0) ? (matches * 100 / totalKeywordsInJD) : 0;
+            List<String> matched = requiredSkills.stream()
+                    .filter(resumeText::contains)
+                    .collect(Collectors.toList());
 
-            model.addAttribute("score", finalScore);
+            List<String> missing = requiredSkills.stream()
+                    .filter(skill -> !resumeText.contains(skill))
+                    .collect(Collectors.toList());
+
+            // Accurate Score Calculation: (Matched / Required) * 100
+            int score = (matched.size() * 100) / requiredSkills.size();
+
+            model.addAttribute("score", score);
             model.addAttribute("fileName", file.getOriginalFilename());
-            model.addAttribute("matched", String.join(", ", matchedSkills));
-            model.addAttribute("missing", String.join(", ", missingSkills));
+            model.addAttribute("matched", String.join(", ", matched));
+            model.addAttribute("missing", String.join(", ", missing));
 
             return "result";
         } catch (Exception e) {
