@@ -34,33 +34,31 @@ public class HelloController {
             String resumeText = tika.parseToString(file.getInputStream()).toLowerCase();
             String jdLower = jd.toLowerCase().replaceAll("[^a-zA-Z0-9 ]", " ");
 
-            // Comprehensive industry keyword list
+            // The "Master Set" of skills a recruiter expects for this field
             Set<String> masterKeywords = new HashSet<>(Arrays.asList(
                     "java", "spring", "sql", "maven", "rest", "api", "git", "docker",
                     "aws", "hibernate", "python", "artificial intelligence", "data science"
             ));
 
-            // Only count keywords that actually appear in the Job Description
-            List<String> requiredSkills = masterKeywords.stream()
+            // 1. Identify which skills are actually being requested
+            List<String> requiredInJD = masterKeywords.stream()
                     .filter(jdLower::contains)
                     .collect(Collectors.toList());
 
-            if (requiredSkills.isEmpty()) {
-                model.addAttribute("score", 0);
-                model.addAttribute("matched", "No matching requirements found in JD.");
-                return "result";
-            }
-
-            List<String> matched = requiredSkills.stream()
+            // 2. Identify which skills from the master list are in the resume
+            List<String> matched = masterKeywords.stream()
                     .filter(resumeText::contains)
                     .collect(Collectors.toList());
 
-            List<String> missing = requiredSkills.stream()
+            // 3. Identify missing skills based on the JD specifically
+            List<String> missing = requiredInJD.stream()
                     .filter(skill -> !resumeText.contains(skill))
                     .collect(Collectors.toList());
 
-            // Accurate Score Calculation: (Matched / Required) * 100
-            int score = (matched.size() * 100) / requiredSkills.size();
+            // --- IMPROVED LOGIC FOR RECRUITERS ---
+            // We now calculate the score based on the Master Keywords (13 total).
+            // This prevents a single word match from showing 100%.
+            int score = (matched.size() * 100) / masterKeywords.size();
 
             model.addAttribute("score", score);
             model.addAttribute("fileName", file.getOriginalFilename());
